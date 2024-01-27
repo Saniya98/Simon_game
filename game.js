@@ -24,6 +24,8 @@ $(".btn").click(function () {
   playSound(userChosenColour);
 
   animatePress(userChosenColour);
+
+  checkAnswer(userClickedPattern.length-1);
 });
 
 function checkAnswer(currentLevel){
@@ -37,9 +39,19 @@ function checkAnswer(currentLevel){
       nextSequence();
     }, 1000);
   }
-  
+
   else{
     console.log("wrong");
+    var audio = new Audio("sounds/" + "wrong.mp3");
+    audio.play();
+    
+    $("body").addClass("game-over");
+
+    setTimeout(function () {
+      $("body").removeClass("game-over");
+    }, 300);
+
+    $("h1").text("Game Over, Press Any Key to Restart");
   }
  
 
